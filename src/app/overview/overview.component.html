@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Übersicht</h1>
+
+</div>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Nr.</th>
+    <th>Name</th>
+    <th>Adresse</th>
+    <th>Eintrittsdatum</th>
+    <th>Austrittsdatum</th>
+    <th>Öffnungszeiten</th>
+    <th>Termin</th>
+    <th>Tests</th>
+    <th>Website</th>
+    <th>Digital Covid Certificate</th>
+    <th>Hinweis</th>
+    <th>Systemmeldung</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let center of centers">
+    <td>{{center.userReference}}</td>
+    <td>{{center.name}}</td>
+    <td>{{center.address}}</td>
+    <td>{{center.enterDate}}</td>
+    <td>{{center.leaveDate}}</td>
+    <td>
+      <ul>
+        <li *ngFor="let value of center.openingHours">{{value}}</li>
+      </ul>
+
+    </td>
+    <td>{{center.appointment | appointmentType}}</td>
+    <td>
+      <ul>
+        <li *ngFor="let kind of center.testKinds">{{kind | testKind}}</li>
+      </ul>
+    </td>
+    <td><a *ngIf="center.website" href="{{center.website}}">{{center.website}}</a></td>
+    <td>{{center.dcc | yesNo}}</td>
+    <td>{{center.addressNote}}</td>
+    <td style="color: #822c2c">{{center.message | errorMessage}}</td>
+    <td><a (click)="delete(center)" title="Teststelle löschen" class="delete-button"><i
+      class="fas fa-trash-alt"></i></a></td>
+  </tr>
+  </tbody>
+</table>
+<div class="d-flex justify-content-end">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item disabled">
+        <span class="page-link">{{datasource.totalResults}} Einträge</span>
+      </li>
+      <li class="page-item">
+        <a class="page-link" style="cursor:pointer;" (click)="datasource.previousPage()" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item disabled"><a class="page-link" href="#">Seite {{datasource.currentPage + 1}}
+        von {{datasource.totalPages}}</a></li>
+      <li class="page-item">
+        <a class="page-link" style="cursor:pointer;" aria-label="Next" (click)="datasource.nextPage()">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+

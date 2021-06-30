@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Einstellungen</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group me-2">
+      <button type="button" class="btn btn-sm btn-outline-primary" (click)="save()">Speichern</button>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="saved">
+  Die Einstellungen wurden erfolgreich gespeichert.
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="error">
+  {{error | errorMessage}}
+</div>
+
+<div *ngIf="operator">
+  <div class="row mb-3">
+    <label for="operatorNumber" class="col-sm-2 col-form-label">Partner Nr.</label>
+    <div class="col-sm-5">
+      <input id="operatorNumber" readonly type="text" [(ngModel)]="operator.operatorNumber" class="form-control">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="operatorName" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-5">
+      <input id="operatorName" type="text" [(ngModel)]="operator.name" class="form-control">
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="operatorLogo" class="col-sm-2 col-form-label">Logo</label>
+    <div class="col-sm-5">
+      <input class="form-control" type="file" id="operatorLogo" (change)="onLogoSelected($event)">
+    </div>
+    <div class="col-sm-5">
+      <img alt="Betreiberlogo" [src]="logo" class="border-1"/>
+    </div>
+  </div>
+</div>
+

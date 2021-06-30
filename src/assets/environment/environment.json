@@ -1,0 +1,8 @@
+{
+  "production": false,
+  "settings": {
+    "authentication": {
+      "issuer": "http://localhost:8080/auth/realms/cwa-map-management-frontend"
+    }
+  }
+}

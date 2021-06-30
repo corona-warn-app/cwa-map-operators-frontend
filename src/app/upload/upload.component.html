@@ -1,0 +1,158 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Import</h1>
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="imported">
+  Die Daten wurden erfolgreich importiert.
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-4">
+    <h4>Schritt 1: Datei auswählen</h4>
+    <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)">
+  </div>
+  <div class="col-md-4">
+    <h4>Schritt 2: Daten hochladen</h4>
+    <p>Die Daten werden noch nicht importiert, sondern lediglich einer ersten Prüfung unterzogen. Dabei wird unter
+      anderem das Format der CSV Datei geprüft, sowie einige Inhaltliche Prüfungen durchgeführt.</p>
+    <button type="button" class="btn btn-primary" [disabled]="!selectedFile" title="Suchen" (click)="prepare()">Upload
+    </button>
+  </div>
+  <div class="col-md-4">
+    <h4>Schritt 3: Daten importieren</h4>
+    <p>In diesem Schritt werden die vorab geprüften Daten in das System importiert. Teststellen, welche bereits
+      existieren, werden aktualisiert, neue Teststellen hinzugefügt.</p>
+    <p>Bereits existierende Teststellen werden anhand der Spalte
+      <mark>Nr.</mark>
+      in der CSV Datei identifiziert.
+    </p>
+
+    <div class="form-check mb-3">
+      <input [(ngModel)]="deleteAll" [disabled]="!uploaded" class="form-check-input" type="checkbox" value=""
+             id="deleteAllCheckbox">
+      <label class="form-check-label" for="deleteAllCheckbox">
+        Vor Import alle Teststellen löschen
+      </label>
+    </div>
+    <button class="btn btn-primary" [disabled]="!uploaded" (click)="import()">Import</button>
+  </div>
+</div>
+
+<div *ngIf="centersWithErrors.length" class="mb-3">
+  <div class="alert alert-danger" role="alert">
+    In folgenden Teststellen wurden während der Verarbeitung Fehler festgestellt. Diese werden nicht importiert.
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Nr.</th>
+      <th>Name</th>
+      <th>Adresse</th>
+      <th>Eintrittsdatum</th>
+      <th>Austrittsdatum</th>
+      <th>Öffnungszeiten</th>
+      <th>Termin</th>
+      <th>Tests</th>
+      <th>Website</th>
+      <th>DCC</th>
+      <th>Hinweis</th>
+      <th>Warnungen</th>
+      <th>Fehler</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let center of centersWithErrors">
+      <td>{{center.center.userReference}}</td>
+      <td>{{center.center.name}}</td>
+      <td>{{center.center.address}}</td>
+      <td>{{center.center.enterDate}}</td>
+      <td>{{center.center.leaveDate}}</td>
+
+      <td>
+        <ul>
+          <li *ngFor="let value of center.center.openingHours">{{value}}</li>
+        </ul>
+
+      </td>
+      <td>{{center.center.appointment | appointmentType}}</td>
+      <td>
+        <ul>
+          <li *ngFor="let kind of center.center.testKinds">{{kind | testKind}}</li>
+        </ul>
+      </td>
+      <td>{{center.center.website}}</td>
+      <td>{{center.center.dcc | yesNo}}</td>
+      <td>{{center.center.addressNote}}</td>
+      <td>
+        <ul>
+          <li *ngFor="let msg of center.warnings">{{msg | errorMessage}}</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let msg of center.errors">{{msg | errorMessage}}</li>
+        </ul>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="preparedCenters.length">
+  <div class="alert alert-success" role="alert">
+    Es wurden {{preparedCenters.length}} Teststellen ohne erkennbare Fehler eingelesen.
+  </div>
+  <div *ngIf="warnings" class="alert alert-warning" role="alert">
+    Einige Teststellen enthalten Fehler, welche den Import erlauben, aber eventull zu unerwarteten Ergebnissen führen.
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Nr.</th>
+      <th>Name</th>
+      <th>Adresse</th>
+      <th>Eintrittsdatum</th>
+      <th>Austrittsdatum</th>
+      <th>Öffnungszeiten</th>
+      <th>Termin</th>
+      <th>Tests</th>
+      <th>Website</th>
+      <th>DCC</th>
+      <th>Hinweis</th>
+      <th>Warnungen</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let center of preparedCenters">
+      <td>{{center.center.userReference}}</td>
+      <td>{{center.center.name}}</td>
+      <td>{{center.center.address}}</td>
+      <td>{{center.center.enterDate}}</td>
+      <td>{{center.center.leaveDate}}</td>
+      <td>
+        <ul>
+          <li *ngFor="let value of center.center.openingHours">{{value}}</li>
+        </ul>
+
+      </td>
+      <td>{{center.center.appointment | appointmentType}}</td>
+      <td>
+        <ul>
+          <li *ngFor="let kind of center.center.testKinds">{{kind | testKind}}</li>
+        </ul>
+      </td>
+      <td>{{center.center.website}}</td>
+      <td>{{center.center.dcc | yesNo}}</td>
+      <td>{{center.center.addressNote}}</td>
+      <td>
+        <ul>
+          <li *ngFor="let msg of center.warnings">{{msg | errorMessage}}</li>
+        </ul>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
