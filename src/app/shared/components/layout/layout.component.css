@@ -1,3 +1,7 @@
 .logout-link {
   cursor: pointer;
 }
+
+.navbar {
+  background-color: #80cdec;
+}

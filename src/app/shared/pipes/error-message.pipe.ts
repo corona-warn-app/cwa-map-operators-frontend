@@ -11,6 +11,7 @@ export class ErrorMessagePipe implements PipeTransform {
     "invalid enter date": "Ungültiges Eintrittsdatum",
     "invalid leave date": "Ungültiges Austrittsdatum",
     "invalid image data": "Ungültige Bildinformationen",
+    "invalid testkind:": "Ungültige Testart:"
   }
 
   transform(value: string, ...args: unknown[]): unknown {
