@@ -20,6 +20,10 @@ export class ErrorMessagePipe implements PipeTransform {
   }
 
   transform(value: string, ...args: unknown[]): unknown {
+    if (!value) {
+      return null;
+    }
+
     if (this.translations[value]) {
       return this.translations[value];
     } else {
