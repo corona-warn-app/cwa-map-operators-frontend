@@ -2,7 +2,7 @@
   "production": false,
   "settings": {
     "authentication": {
-      "issuer": "http://localhost:8080/auth/realms/cwa-map-management-frontend"
+      "issuer": "http://localhost:7070/auth/realms/cwa-map-management-frontend"
     }
   }
 }

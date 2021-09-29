@@ -6,8 +6,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class AppointmentTypePipe implements PipeTransform {
 
   private translations: { [id: string]: string } = {
-    "Required": "Benötigt",
-    "NotRequired": "Nicht benötigt",
+    "Required": "Erforderlich",
+    "NotRequired": "Nicht notwendig",
     "Possible": "Möglich"
   }
 

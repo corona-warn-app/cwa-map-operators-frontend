@@ -31,6 +31,7 @@ export interface EditCenter {
   userReference: string;
   name: string;
   website: string;
+  email: string;
   address: string;
   openingHours: string[];
   addressNote: string;
@@ -47,7 +48,7 @@ export class ImportCenterRequest {
 }
 
 export interface ImportCenterResult {
-  center: Center;
+  center: EditCenter;
   errors: string[];
   warnings: string[];
 }

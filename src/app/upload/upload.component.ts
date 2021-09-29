@@ -22,6 +22,7 @@ export class UploadComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile);
     this.reset();
   }
 
@@ -32,6 +33,10 @@ export class UploadComponent implements OnInit {
     }
 
     const reader = new FileReader();
+    reader.onerror = ev => {
+      this.topWarning = "Die Datei konnte nicht gelesen werden. Wurde sie eventuell verändert, nachdem Sie sie ausgewählt haben?";
+    };
+
     reader.addEventListener('load', (event: any) => {
       this.centers.prepareImport(event.target.result).subscribe(result => {
         if (result.length == 0) {
@@ -40,14 +45,12 @@ export class UploadComponent implements OnInit {
           this.preparedCenters = result.filter(c => c.errors == null || c.errors.length == 0);
           this.centersWithErrors = result.filter(c => c.errors != null && c.errors.length > 0);
 
-          let insertAt = 0;
           for (let i = 0; i < this.preparedCenters.length; i++) {
             const tmp = this.preparedCenters[i];
             if (tmp.warnings != null && tmp.warnings.length > 0) {
               this.warnings = true;
-              this.preparedCenters[i] = this.preparedCenters[insertAt];
-              this.preparedCenters[insertAt] = tmp;
-              insertAt++;
+              this.preparedCenters.splice(i, 1);
+              this.preparedCenters.unshift(tmp);
             }
           }
           this.uploaded = true;
@@ -58,6 +61,7 @@ export class UploadComponent implements OnInit {
   }
 
   private reset() {
+    this.warnings = false;
     this.topWarning = null;
     this.imported = false;
     this.deleteAll = false;
@@ -66,19 +70,7 @@ export class UploadComponent implements OnInit {
   }
 
   import() {
-    const centers = this.preparedCenters.map<EditCenter>(v => ({
-      name: v.center.name,
-      address: v.center.address,
-      addressNote: v.center.addressNote,
-      dcc: v.center.dcc,
-      appointment: v.center.appointment,
-      openingHours: v.center.openingHours,
-      testKinds: v.center.testKinds,
-      userReference: v.center.userReference,
-      website: v.center.website,
-      enterDate: v.center.enterDate,
-      leaveDate: v.center.leaveDate
-    }));
+    const centers = this.preparedCenters.map<EditCenter>(v => v.center);
     this.centers.importCenters({centers: centers, deleteAll: this.deleteAll}).subscribe(result => {
       this.imported = true;
       this.centersWithErrors = [];

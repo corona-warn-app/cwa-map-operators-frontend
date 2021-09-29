@@ -12,10 +12,10 @@ export class OperatorsService {
   }
 
   getOperator(): Observable<OperatorDTO> {
-    return this.http.get<OperatorDTO>('/api/operators');
+    return this.http.get<OperatorDTO>('/api/operators/current');
   }
 
   save(operator: OperatorDTO): Observable<OperatorDTO> {
-    return this.http.put<OperatorDTO>('/api/operators', operator);
+    return this.http.put<OperatorDTO>('/api/operators/current', operator);
   }
 }

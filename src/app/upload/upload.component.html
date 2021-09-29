@@ -15,7 +15,7 @@
   <div class="col-md-4">
     <h4>Schritt 1: Datei auswählen</h4>
     <p>Die Vorlage können Sie <a href="/assets/Import_Vorlage.xlsx">hier</a> herunterladen.</p>
-    <p>Füllen Sie die Vorlage aus, speichern diese als <i>"CSV UTF-8 (durch Trennzeichen getrennt) (*.csv)"</i> ab und wählen sie hier aus.</p>
+    <p>Füllen Sie die Vorlage aus, speichern diese im CSV Format (In Excel: <i>"CSV UTF-8 (durch Trennzeichen getrennt) (*.csv)"</i>) ab und wählen sie hier aus.</p>
     <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)">
   </div>
   <div class="col-md-4">
@@ -69,6 +69,7 @@
         <th>Termin</th>
         <th>Tests</th>
         <th>Website</th>
+        <th>E-Mail</th>
         <th>DCC</th>
         <th>Hinweis</th>
         <th>Warnungen</th>
@@ -97,6 +98,7 @@
           </ul>
         </td>
         <td>{{center.center.website}}</td>
+        <td>{{center.center.email}}</td>
         <td>{{center.center.dcc | yesNo}}</td>
         <td>{{center.center.addressNote}}</td>
         <td>
@@ -117,7 +119,7 @@
 
 <div *ngIf="preparedCenters.length">
   <div class="alert alert-success d-flex justify-content-between" role="alert">
-    <p>Es wurden {{preparedCenters.length}} Teststellen ohne erkennbare Fehler eingelesen.</p>
+    <p>Es wurden {{preparedCenters.length}} Teststellen ohne Fehler, welche den Import verhindern, eingelesen.</p>
     <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#preparedTable"
             aria-expanded="false" aria-controls="preparedTable">
       Anzeigen
@@ -125,7 +127,7 @@
   </div>
 
   <div *ngIf="warnings" class="alert alert-warning" role="alert">
-    Einige Teststellen enthalten Fehler, welche den Import erlauben, aber eventuell zu unerwarteten Ergebnissen führen.
+    Einige Teststellen enthalten jedoch Fehler, welche zu unerwarteten Ergebnissen führen können. Die Teststellen werden dennoch importiert und sind auf der Karte sichtbar.
   </div>
 
   <div class="collapse" id="preparedTable">
@@ -141,6 +143,7 @@
         <th>Termin</th>
         <th>Tests</th>
         <th>Website</th>
+        <th>E-Mail</th>
         <th>DCC</th>
         <th>Hinweis</th>
         <th>Warnungen</th>
@@ -167,6 +170,7 @@
           </ul>
         </td>
         <td>{{center.center.website}}</td>
+        <td>{{center.center.email}}</td>
         <td>{{center.center.dcc | yesNo}}</td>
         <td>{{center.center.addressNote}}</td>
         <td>

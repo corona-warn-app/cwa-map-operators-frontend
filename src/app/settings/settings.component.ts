@@ -19,7 +19,6 @@ export class SettingsComponent implements OnInit {
   }
 
   onLogoSelected(event: any) {
-
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       if (this.operator == null) {
@@ -39,6 +38,7 @@ export class SettingsComponent implements OnInit {
     this.operators.save(this.operator).subscribe(op => {
         this.setOperator(op);
         this.saved = true;
+        this.error = null;
       },
       error => this.error = error.error.message);
   }

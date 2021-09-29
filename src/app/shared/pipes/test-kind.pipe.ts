@@ -8,7 +8,8 @@ export class TestKindPipe implements PipeTransform {
   private translations: { [id: string]: string } = {
     "Antigen": "Antigen",
     "PCR": "PCR",
-    "Vaccination": "Impfung"
+    "Vaccination": "Impfung",
+    "Antibody": "Antikörper"
   }
 
   transform(value: string, ...args: unknown[]): unknown {
