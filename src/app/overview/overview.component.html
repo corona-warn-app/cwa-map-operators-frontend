@@ -15,6 +15,7 @@
     <th>Termin</th>
     <th>Tests</th>
     <th>Website</th>
+    <th>E-Mail</th>
     <th>Digital Covid Certificate</th>
     <th>Hinweis</th>
     <th>Systemmeldung</th>
@@ -42,6 +43,7 @@
       </ul>
     </td>
     <td><a *ngIf="center.website" href="{{center.website}}">{{center.website}}</a></td>
+    <td>{{center.email}}</td>
     <td>{{center.dcc | yesNo}}</td>
     <td>{{center.addressNote}}</td>
     <td style="color: #822c2c">{{center.message | errorMessage}}</td>

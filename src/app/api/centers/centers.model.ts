@@ -14,6 +14,7 @@ export interface Center {
   appointment: string;
   testKinds: string[];
   website: string;
+  email: string;
   openingHours: string[];
   dcc: boolean;
   operator: OperatorDTO;
