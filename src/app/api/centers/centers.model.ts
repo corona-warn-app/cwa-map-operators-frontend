@@ -36,7 +36,7 @@ export interface EditCenter {
   address: string;
   openingHours: string[];
   addressNote: string;
-  appointment: string;
+  appointment: string | null;
   testKinds: string[];
   dcc: boolean;
   enterDate: string;

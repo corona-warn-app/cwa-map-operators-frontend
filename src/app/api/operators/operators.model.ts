@@ -8,4 +8,6 @@ export interface OperatorSummaryDTO {
 export interface OperatorDTO extends OperatorSummaryDTO {
   name: string;
   operatorNumber: string;
+  email: string;
+  reportReceiver: string;
 }

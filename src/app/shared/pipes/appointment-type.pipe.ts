@@ -11,7 +11,10 @@ export class AppointmentTypePipe implements PipeTransform {
     "Possible": "Möglich"
   }
 
-  transform(value: string, ...args: unknown[]): unknown {
+  transform(value: string|null, ...args: unknown[]): unknown {
+    if (value == null) {
+      return "Unbekannt";
+    }
     return this.translations[value] || "Unbekannt";
   }
 

@@ -8,9 +8,10 @@ import {HttpClientModule} from "@angular/common/http";
 import {AuthConfig, OAuthModule} from 'angular-oauth2-oidc';
 import {AuthenticationService} from "./auth.service";
 import {SharedModule} from "./shared/shared.module";
-import { OverviewComponent } from './overview/overview.component';
-import { SettingsComponent } from './settings/settings.component';
-import {FormsModule} from "@angular/forms";
+import {OverviewComponent} from './overview/overview.component';
+import {SettingsComponent} from './settings/settings.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {EditCenterComponent} from './edit-center/edit-center.component';
 
 
 @NgModule({
@@ -18,21 +19,23 @@ import {FormsModule} from "@angular/forms";
     AppComponent,
     UploadComponent,
     OverviewComponent,
-    SettingsComponent
+    SettingsComponent,
+    EditCenterComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-      FormsModule,
-        HttpClientModule,
-        OAuthModule.forRoot({
-            resourceServer: {
-                sendAccessToken: true,
-                allowedUrls: ['/api']
-            }
-        }),
-        SharedModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        sendAccessToken: true,
+        allowedUrls: ['/api']
+      }
+    }),
+    ReactiveFormsModule,
+    SharedModule
+  ],
   providers: [
     AuthenticationService
   ]

@@ -1,0 +1,135 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Teststelle: {{title}}</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <button type="button" class="btn btn-sm btn-outline-secondary me-2"
+            (click)="save()" title="Speichern">
+      <i class="fa fa-save fa-fw"></i>
+    </button>
+  </div>
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="saved">
+  Die Teststelle wurde erfolgreich gespeichert.
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="error">
+  {{error | errorMessage}}
+</div>
+
+<form [formGroup]="form">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input id="name" class="form-control" type="text" formControlName="name">
+    <div *ngIf="form.controls.name.errors && (form.controls.name.dirty || form.controls.name.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.name.errors.required">Kein Name angegeben</div>
+      <div *ngIf="form.controls.name.errors.backend">{{form.controls.name.errors.backend}}</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="address" class="form-label">Address</label>
+    <input id="address" class="form-control" type="text" formControlName="address"
+           placeholder="Straße Hausnummer, PLZ Ort">
+    <div *ngIf="form.controls.address.errors && (form.controls.address.dirty || form.controls.address.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.address.errors.required">Keine Adresse angegeben</div>
+      <div *ngIf="form.controls.address.errors.backend">{{form.controls.address.errors.backend}}</div>
+    </div>
+    <div class="form-text">Bitte die Adresse in der Form "Hauptstraße 23, 12345 Berlin" angeben</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="addressNote" class="form-label">Addresshinweis</label>
+    <input id="addressNote" class="form-control" type="text" formControlName="addressNote"
+           placeholder="Rollstohlgerecht">
+    <div *ngIf="form.controls.addressNote.errors && (form.controls.addressNote.dirty || form.controls.addressNote.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.addressNote.errors.backend">{{form.controls.addressNote.errors.backend}}</div>
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="email" class="form-label">E-Mail</label>
+    <input id="email" class="form-control" type="email" formControlName="email">
+    <div *ngIf="form.controls.email.errors && (form.controls.email.dirty || form.controls.email.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.email.errors.required">Keine E-Mail angegeben</div>
+      <div *ngIf="form.controls.email.errors.email">Keine gültige E-Mail Adresse</div>
+      <div *ngIf="form.controls.email.errors.backend">{{form.controls.email.errors.backend}}</div>
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="enterDate" class="form-label">Eintrittsdatum</label>
+    <input id="enterDate" class="form-control" type="text" formControlName="enterDate" placeholder="01.01.2022">
+    <div *ngIf="form.controls.enterDate.errors && (form.controls.enterDate.dirty || form.controls.enterDate.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.enterDate.errors.pattern">Ungültiges Format</div>
+      <div *ngIf="form.controls.enterDate.errors.backend">{{form.controls.enterDate.errors.backend}}</div>
+    </div>
+    <div class="form-text">Vor dem Eintrittsdatum ist die Teststelle nicht sichtbar.</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="leaveDate" class="form-label">Austrittsdatum</label>
+    <input id="leaveDate" class="form-control" type="text" formControlName="leaveDate" placeholder="01.01.2022">
+    <div *ngIf="form.controls.leaveDate.errors && (form.controls.leaveDate.dirty || form.controls.leaveDate.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.leaveDate.errors.pattern">Ungültiges Format</div>
+      <div *ngIf="form.controls.leaveDate.errors.backend">{{form.controls.leaveDate.errors.backend}}</div>
+    </div>
+    <div class="form-text">Nach dem Austrittsdatum ist die Teststelle nicht sichtbar.</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="appointment" class="form-label">Terminvergabe</label>
+    <select id="appointment" class="form-select" formControlName="appointment">
+      <option value="">Keine Angabe</option>
+      <option value="Possible">Möglich</option>
+      <option value="Required">Notwendig</option>
+      <option value="NotRequired">Nicht Notwendig</option>
+    </select>
+    <div *ngIf="form.controls.appointment.errors && (form.controls.appointment.dirty || form.controls.appointment.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.appointment.errors.backend">{{form.controls.appointment.errors.backend}}</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="testKinds" class="form-label">Testmöglichkeiten</label>
+    <select id="testKinds" class="form-select" formControlName="testKinds" multiple>
+      <option value="Antigen">Antigentest</option>
+      <option value="PCR">PCR Test</option>
+      <option value="Vaccination">Impfung</option>
+    </select>
+    <div *ngIf="form.controls.testKinds.errors && (form.controls.testKinds.dirty || form.controls.testKinds.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.testKinds.errors.backend">{{form.controls.testKinds.errors.backend}}</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="dcc" formControlName="dcc">
+      <label class="form-check-label" for="dcc">
+        Digital Covid Certificate
+      </label>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="openingHours" class="form-label">Öffnungszeiten</label>
+    <textarea id="openingHours" class="form-control" type="text" formControlName="openingHours"></textarea>
+    <div *ngIf="form.controls.openingHours.errors && (form.controls.openingHours.dirty || form.controls.openingHours.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.openingHours.errors.backend">{{form.controls.openingHours.errors.backend}}</div>
+    </div>
+    <div class="form-text">Bitte einen Eintrag pro Zeile. Bevorzugt in den Formaten: "Mo: 08:00 - 16:00", "Mo. - Fr.:
+      07:00 - 12:00 & 13:00 - 18:00", "Mo., Di., Mi.: 12:00 - 16:00"
+    </div>
+  </div>
+
+</form>

@@ -71,7 +71,10 @@ export class UploadComponent implements OnInit {
 
   import() {
     const centers = this.preparedCenters.map<EditCenter>(v => v.center);
-    this.centers.importCenters({centers: centers, deleteAll: this.deleteAll}).subscribe(result => {
+    this.centers.importCenters({
+      centers: centers,
+      deleteAll: this.deleteAll
+    }).subscribe(result => {
       this.imported = true;
       this.centersWithErrors = [];
       this.preparedCenters = [];

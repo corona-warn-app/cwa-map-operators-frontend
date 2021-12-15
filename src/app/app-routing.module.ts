@@ -5,22 +5,17 @@ import {AuthGuard} from "./auth.guard";
 import {LayoutComponent} from "./shared/components/layout/layout.component";
 import {OverviewComponent} from "./overview/overview.component";
 import {SettingsComponent} from "./settings/settings.component";
+import {EditCenterComponent} from "./edit-center/edit-center.component";
 
 const routes: Routes = [
   {
-    path: "overview",
+    path: "centers",
     canActivate: [AuthGuard],
     component: LayoutComponent,
     children: [
-      {path: '', component: OverviewComponent}
-    ]
-  },
-  {
-    path: "import",
-    canActivate: [AuthGuard],
-    component: LayoutComponent,
-    children: [
-      {path: '', component: UploadComponent}
+      {path: "overview", component: OverviewComponent},
+      {path: "import", component: UploadComponent},
+      {path: ":uuid", component: EditCenterComponent}
     ]
   },
   {

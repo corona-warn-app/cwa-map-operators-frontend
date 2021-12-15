@@ -12,12 +12,20 @@ export class CentersService {
   constructor(private http: HttpClient) {
   }
 
+  getCenterByUuid(uuid: string): Observable<Center> {
+    return this.http.get<Center>(`/api/centers/${uuid}`);
+  }
+
+  updateCenter(uuid: string, center: EditCenter): Observable<Center> {
+    return this.http.put<Center>(`/api/centers/${uuid}`, center);
+  }
+
   prepareImport(csv: string): Observable<ImportCenterResult[]> {
     return this.http.post<ImportCenterResult[]>('/api/centers/csv', csv);
   }
 
-  importCenters(centers: ImportCenterRequest): Observable<EditCenter[]> {
-    return this.http.post<EditCenter[]>('/api/centers', centers);
+  importCenters(centers: ImportCenterRequest): Observable<Center[]> {
+    return this.http.post<Center[]>('/api/centers', centers);
   }
 
   delete(center: Center): Observable<any> {
