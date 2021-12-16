@@ -121,6 +121,7 @@ export class EditCenterComponent implements OnInit {
       appointment: center.appointment ? center.appointment : "",
       testKinds: center.testKinds,
       openingHours: center.openingHours ? center.openingHours.join("\n") : "",
+      dcc: center.dcc
     });
   }
 
