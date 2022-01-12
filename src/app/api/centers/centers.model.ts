@@ -22,6 +22,7 @@ export interface Center {
   enterDate: string;
   leaveDate: string;
   message: string;
+  visible: boolean;
 }
 
 export interface CenterWithDistance extends Center {
@@ -41,6 +42,7 @@ export interface EditCenter {
   dcc: boolean;
   enterDate: string;
   leaveDate: string;
+  visible: boolean;
 }
 
 export class ImportCenterRequest {

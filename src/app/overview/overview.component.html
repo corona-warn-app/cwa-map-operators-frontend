@@ -27,6 +27,7 @@
     <th>E-Mail</th>
     <th>Digital Covid Certificate</th>
     <th>Hinweis</th>
+    <th>Sichtbar</th>
     <th>Systemmeldung</th>
     <th></th>
   </tr>
@@ -56,6 +57,7 @@
     <td>{{center.email}}</td>
     <td>{{center.dcc | yesNo}}</td>
     <td>{{center.addressNote}}</td>
+    <td>{{center.visible | yesNo}}</td>
     <td style="color: #822c2c">{{center.message | errorMessage}}</td>
     <td><a (click)="delete(center)" title="Teststelle löschen" class="delete-button"><i
       class="fas fa-trash-alt"></i></a></td>

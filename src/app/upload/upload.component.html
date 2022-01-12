@@ -15,7 +15,8 @@
   <div class="col-md-4">
     <h4>Schritt 1: Datei auswählen</h4>
     <p>Die Vorlage können Sie <a href="/assets/Import_Vorlage.xlsx">hier</a> herunterladen.</p>
-    <p>Füllen Sie die Vorlage aus, speichern diese im CSV Format (In Excel: <i>"CSV UTF-8 (durch Trennzeichen getrennt) (*.csv)"</i>) ab und wählen sie hier aus.</p>
+    <p>Füllen Sie die Vorlage aus, speichern diese im CSV Format (In Excel: <i>"CSV UTF-8 (durch Trennzeichen getrennt)
+      (*.csv)"</i>) ab und wählen sie hier aus.</p>
     <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)">
   </div>
   <div class="col-md-4">
@@ -72,6 +73,7 @@
         <th>E-Mail</th>
         <th>DCC</th>
         <th>Hinweis</th>
+        <th>Sichtbar</th>
         <th>Warnungen</th>
         <th>Fehler</th>
       </tr>
@@ -101,6 +103,7 @@
         <td>{{center.center.email}}</td>
         <td>{{center.center.dcc | yesNo}}</td>
         <td>{{center.center.addressNote}}</td>
+        <td>{{center.center.visible | yesNo}}</td>
         <td>
           <ul>
             <li *ngFor="let msg of center.warnings">{{msg | errorMessage}}</li>
@@ -127,7 +130,8 @@
   </div>
 
   <div *ngIf="warnings" class="alert alert-warning" role="alert">
-    Einige Teststellen enthalten jedoch Fehler, welche zu unerwarteten Ergebnissen führen können. Die Teststellen werden dennoch importiert und sind auf der Karte sichtbar.
+    Einige Teststellen enthalten jedoch Fehler, welche zu unerwarteten Ergebnissen führen können. Die Teststellen werden
+    dennoch importiert und sind auf der Karte sichtbar.
   </div>
 
   <div class="collapse" id="preparedTable">
@@ -146,6 +150,7 @@
         <th>E-Mail</th>
         <th>DCC</th>
         <th>Hinweis</th>
+        <th>Sichtbar</th>
         <th>Warnungen</th>
       </tr>
       </thead>
@@ -173,6 +178,7 @@
         <td>{{center.center.email}}</td>
         <td>{{center.center.dcc | yesNo}}</td>
         <td>{{center.center.addressNote}}</td>
+        <td>{{center.center.visible | yesNo}}</td>
         <td>
           <ul>
             <li *ngFor="let msg of center.warnings">{{msg | errorMessage}}</li>

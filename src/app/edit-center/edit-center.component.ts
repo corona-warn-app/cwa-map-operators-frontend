@@ -24,12 +24,14 @@ export class EditCenterComponent implements OnInit {
     address: new FormControl('', [Validators.required]),
     addressNote: new FormControl(''),
     email: new FormControl('', [Validators.email, Validators.required]),
+    website: new FormControl(''),
     enterDate: new FormControl('', [Validators.pattern(/\d\d\.\d\d\.\d\d\d\d/)]),
     leaveDate: new FormControl('', [Validators.pattern(/\d\d\.\d\d\.\d\d\d\d/)]),
     appointment: new FormControl(''),
     testKinds: new FormControl(''),
     openingHours: new FormControl(''),
-    dcc: new FormControl(false)
+    dcc: new FormControl(false),
+    visible: new FormControl(true)
   });
 
   constructor(private centerService: CentersService,
@@ -51,11 +53,13 @@ export class EditCenterComponent implements OnInit {
       address: this.form.get('address')?.value,
       addressNote: this.form.get('addressNote')?.value,
       email: this.form.get('email')?.value,
+      website: this.form.get('website')?.value,
       enterDate: this.form.get('enterDate')?.value,
       leaveDate: this.form.get('leaveDate')?.value,
       appointment: this.form.get('appointment')?.value,
       testKinds: this.form.get('testKinds')?.value,
-      dcc: this.form.get('dcc')?.value
+      dcc: this.form.get('dcc')?.value,
+      visible: this.form.get('visible')?.value
     } as EditCenter;
 
     if (editCenter.appointment === "") {
@@ -116,12 +120,14 @@ export class EditCenterComponent implements OnInit {
       address: center.address,
       addressNote: center.addressNote,
       email: center.email,
+      website: center.website,
       enterDate: center.enterDate,
       leaveDate: center.leaveDate,
       appointment: center.appointment ? center.appointment : "",
       testKinds: center.testKinds,
       openingHours: center.openingHours ? center.openingHours.join("\n") : "",
-      dcc: center.dcc
+      dcc: center.dcc,
+      visible: center.visible
     });
   }
 

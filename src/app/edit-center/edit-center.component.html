@@ -61,6 +61,14 @@
     </div>
   </div>
 
+  <div class="mb-3">
+    <label for="website" class="form-label">Webseite (z.B. Terminbuchung)</label>
+    <input id="website" class="form-control" type="website" formControlName="website">
+    <div *ngIf="form.controls.website.errors && (form.controls.website.dirty || form.controls.website.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.website.errors.backend">{{form.controls.website.errors.backend}}</div>
+    </div>
+  </div>
 
   <div class="mb-3">
     <label for="enterDate" class="form-label">Eintrittsdatum</label>
@@ -116,6 +124,15 @@
       <input class="form-check-input" type="checkbox" value="" id="dcc" formControlName="dcc">
       <label class="form-check-label" for="dcc">
         Digital Covid Certificate
+      </label>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="visible" formControlName="visible">
+      <label class="form-check-label" for="visible">
+        Sichtbar
       </label>
     </div>
   </div>
