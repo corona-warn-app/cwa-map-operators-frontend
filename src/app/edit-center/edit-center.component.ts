@@ -138,7 +138,9 @@ export class EditCenterComponent implements OnInit {
         if (uuid != null && uuid !== "new") {
           return this.centerService.getCenterByUuid(uuid);
         } else {
-          return of({} as Center);
+          return of({
+            visible: true
+          } as Center);
         }
       })
     ).subscribe(center => {
