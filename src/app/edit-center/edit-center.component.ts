@@ -31,7 +31,9 @@ export class EditCenterComponent implements OnInit {
     testKinds: new FormControl(''),
     openingHours: new FormControl(''),
     dcc: new FormControl(false),
-    visible: new FormControl(true)
+    visible: new FormControl(true),
+    labId: new FormControl(''),
+    operatorName: new FormControl('')
   });
 
   constructor(private centerService: CentersService,
@@ -59,7 +61,9 @@ export class EditCenterComponent implements OnInit {
       appointment: this.form.get('appointment')?.value,
       testKinds: this.form.get('testKinds')?.value,
       dcc: this.form.get('dcc')?.value,
-      visible: this.form.get('visible')?.value
+      visible: this.form.get('visible')?.value,
+      operatorName: this.form.get('operatorName')?.value,
+      labId: this.form.get('labId')?.value,
     } as EditCenter;
 
     if (editCenter.appointment === "") {
@@ -127,7 +131,9 @@ export class EditCenterComponent implements OnInit {
       testKinds: center.testKinds,
       openingHours: center.openingHours ? center.openingHours.join("\n") : "",
       dcc: center.dcc,
-      visible: center.visible
+      visible: center.visible,
+      operatorName: center.operatorName,
+      labId: center.labId
     });
   }
 

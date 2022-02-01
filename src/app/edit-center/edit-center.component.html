@@ -40,6 +40,26 @@
   </div>
 
   <div class="mb-3">
+    <label for="operatorName" class="form-label">Name des Betreibers</label>
+    <input id="operatorName" class="form-control" type="text" formControlName="operatorName">
+    <div *ngIf="form.controls.operatorName.errors && (form.controls.operatorName.dirty || form.controls.operatorName.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.operatorName.errors.required">Keine Betreibername angegeben</div>
+      <div *ngIf="form.controls.operatorName.errors.backend">{{form.controls.operatorName.errors.backend}}</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="labId" class="form-label">Lab Id</label>
+    <input id="labId" class="form-control" type="text" formControlName="labId">
+    <div *ngIf="form.controls.labId.errors && (form.controls.labId.dirty || form.controls.labId.touched || submitted)"
+         style="color: red">
+      <div *ngIf="form.controls.labId.errors.required">Keine Lab Id angegeben</div>
+      <div *ngIf="form.controls.labId.errors.backend">{{form.controls.labId.errors.backend}}</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
     <label for="addressNote" class="form-label">Addresshinweis</label>
     <input id="addressNote" class="form-control" type="text" formControlName="addressNote"
            placeholder="Rollstohlgerecht">

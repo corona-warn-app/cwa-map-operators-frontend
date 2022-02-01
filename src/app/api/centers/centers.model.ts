@@ -23,6 +23,8 @@ export interface Center {
   leaveDate: string;
   message: string;
   visible: boolean;
+  labId: string;
+  operatorName: string;
 }
 
 export interface CenterWithDistance extends Center {
@@ -43,6 +45,8 @@ export interface EditCenter {
   enterDate: string;
   leaveDate: string;
   visible: boolean;
+  labId: string;
+  operatorName: string;
 }
 
 export class ImportCenterRequest {

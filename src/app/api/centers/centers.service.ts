@@ -32,8 +32,15 @@ export class CentersService {
     return this.http.delete(`/api/centers/${center.uuid}`);
   }
 
-  getCenters(page: PageRequest): Observable<PagedResult<Center>> {
-    let params = new HttpParams().set('page', page.page).set('size', page.size);
+  getCenters(page: PageRequest, searchString: string|null): Observable<PagedResult<Center>> {
+    let params = new HttpParams()
+      .set('page', page.page)
+      .set('size', page.size);
+
+    if (searchString != null) {
+      params = params.set('search', searchString);
+    }
+
     return this.http.get<PagedResult<Center>>('/api/centers/all', {params});
   }
 }
