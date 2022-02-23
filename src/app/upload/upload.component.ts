@@ -55,6 +55,10 @@ export class UploadComponent implements OnInit {
           }
           this.uploaded = true;
         }
+      }, error => {
+        if (error.error && error.error.message) {
+          this.topWarning = error.error.message;
+        }
       });
     });
     reader.readAsText(this.selectedFile);
