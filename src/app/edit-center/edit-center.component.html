@@ -169,4 +169,31 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-6">
+      <div class="mb-3">
+        <label for="longitude" class="form-label">Längengrad</label>
+        <input id="longitude" class="form-control" type="number" formControlName="longitude" placeholder="13.37769984005818">
+        <div *ngIf="form.controls.longitude.errors && (form.controls.longitude.dirty || form.controls.longitude.touched || submitted)"
+             style="color: red">
+          <div *ngIf="form.controls.longitude.errors.backend">{{form.controls.longitude.errors.backend}}</div>
+        </div>
+        <div class="form-text">Durch manuelles hinzufügen der Koordinaten können Sie die Position
+          des Markers auf der Karte genau bestimmen.</div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="mb-3">
+        <label for="latitude" class="form-label">Breitengrad</label>
+        <input id="latitude" class="form-control" type="number" formControlName="latitude"
+               placeholder="52.516296883321765">
+        <div *ngIf="form.controls.latitude.errors && (form.controls.latitude.dirty || form.controls.latitude.touched || submitted)"
+             style="color: red">
+          <div *ngIf="form.controls.latitude.errors.backend">{{form.controls.latitude.errors.backend}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </form>

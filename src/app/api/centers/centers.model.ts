@@ -27,10 +27,6 @@ export interface Center {
   operatorName: string;
 }
 
-export interface CenterWithDistance extends Center {
-  distance: number;
-}
-
 export interface EditCenter {
   userReference: string;
   name: string;
@@ -47,6 +43,7 @@ export interface EditCenter {
   visible: boolean;
   labId: string;
   operatorName: string;
+  coordinates: Coordinates;
 }
 
 export class ImportCenterRequest {

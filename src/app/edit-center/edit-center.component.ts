@@ -33,7 +33,9 @@ export class EditCenterComponent implements OnInit {
     dcc: new FormControl(false),
     visible: new FormControl(true),
     labId: new FormControl(''),
-    operatorName: new FormControl('')
+    operatorName: new FormControl(''),
+    longitude: new FormControl(''),
+    latitude: new FormControl('')
   });
 
   constructor(private centerService: CentersService,
@@ -64,6 +66,10 @@ export class EditCenterComponent implements OnInit {
       visible: this.form.get('visible')?.value,
       operatorName: this.form.get('operatorName')?.value,
       labId: this.form.get('labId')?.value,
+      coordinates: {
+        longitude: parseFloat(this.form.get('longitude')?.value),
+        latitude: parseFloat(this.form.get('latitude')?.value)
+      }
     } as EditCenter;
 
     if (editCenter.appointment === "") {
@@ -133,7 +139,9 @@ export class EditCenterComponent implements OnInit {
       dcc: center.dcc,
       visible: center.visible,
       operatorName: center.operatorName,
-      labId: center.labId
+      labId: center.labId,
+      longitude: center.coordinates ? center.coordinates.longitude : 0,
+      latitude: center.coordinates ? center.coordinates.latitude : 0
     });
   }
 
